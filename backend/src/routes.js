@@ -1,32 +1,24 @@
 const express = require('express');
-const crypto=require('crypto');
-const connection=require('./database/connection');
+const OngController=require('./controller/OngController');
+const incidentControlleer=require('./controller/IncidentController');
+const profileControlleer=require('./controller/ProfileController');
+const sessionControlleer=require('./controller/sessionController');
+
 const { request } = require('http');
 const { response } = require('express');
-
 const routes = express.Router();
 
-// aqui ficam as rotas padrão
+// rotas padrão para ONG
+routes.get('/ongs', OngController.index);
+routes.post('/ongs', OngController.create);
 
-routes.get('/ongs', async (request, response)=>{
-    const ongs=await connection('ongs').select('*');
-    return response.json(ongs);
-});
+// rotas padrão para CASOS
+routes.post('/incidents',incidentControlleer.create);
+routes.get('/incidents',incidentControlleer.index);
+routes.delete('/incidents/:id',incidentControlleer.deletar);
+routes.get('/profile',profileControlleer.index); // listar caso espfco
 
-routes.post('/ongs', async (request, response) => {
-    const { name,email,whatsapp, city, uf} = request.body;
-    const id=crypto.randomBytes(4).toString('hex');
-  await connection('ongs').insert({
-        id, 
-        name,
-        email,
-        whatsapp,
-        city,
-        uf,
-    })
-
-    return response.json( {id});
-});
-
+// rota para fazer login
+routes.post('/sessions',sessionControlleer.create);
 
 module.exports = routes;
