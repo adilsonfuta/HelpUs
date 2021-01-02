@@ -8,7 +8,11 @@ module.exports = {
     client: 'sqlite3',
     connection: {
       filename: './src/database/banco.sqlite'
-    }
+    },
+    migrations:{
+      directory:'./src/database/migrations'
+    },
+    useNullAsDefault:true,
   },
 
   // ambiente de hml
