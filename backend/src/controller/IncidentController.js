@@ -19,7 +19,22 @@ module.exports = {
 
     // para listar casos (index)
     async index(request, response) {
-        const casos = await connection('incidents').select('*');
+
+        const { page=1 }= request.query;
+        const [total_casos]= await connection('incidents').count(); 
+
+        const casos = await connection('incidents')
+        .join('ongs','ongs.id','=','incidents.ong_id').limit(5)
+        .offset((page-1)*5)
+        .select(
+            'incidents.*',
+            'ongs.name',
+            'ongs.email',
+            'ongs.whatsapp',
+            'ongs.city',
+            'ongs.uf');
+
+        response.header('X-Total-Count', total_casos['count(*)']);
         return response.json(casos);
     },
 
