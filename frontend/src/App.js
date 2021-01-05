@@ -1,20 +1,13 @@
-import React, {useState} from "react";
-import Header from "./Header";
+import React from "react";
+import './global.css';
+import Login from "./pages/login.component";
+
 
 
 function App() {
-  
-  // estado e imutabilidade e propriedades
-
-  let [contador,setContador] = useState(0);
-  function adicionar() {
-    setContador(contador+1);
-    console.log(contador)
-  }
   return (
     <div>
-      <Header >Contador: {contador} </Header>
-      <button onClick={adicionar}>Iniciar</button>
+      <Login></Login>    
     </div>
 
   );
