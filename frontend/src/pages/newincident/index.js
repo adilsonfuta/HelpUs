@@ -1,11 +1,35 @@
-import React from "react";
+import React, {useState} from "react";
 import './style.css';
-import { Link } from "react-router-dom";
+import { Link, useHistory} from "react-router-dom";
 import { FiArrowLeft } from 'react-icons/all';
 
 import logoImg from "../../assets/logo.svg";
+import api from "../../services/API";
 
 export default function NewIncident(){
+    const [tittle, settitle] =useState('');
+    const [descriptions, setdescriptions] =useState('');
+    const [value, setvalue] =useState('');
+    const ongId = localStorage.getItem('ongId');
+    const history=useHistory();
+
+    async function SaveCaso() {
+        e.preventDefault();
+       
+        const data={title, descriptions, value, };
+        try {
+             await api.post('incidents', data, {
+                headers:{
+                    Authorization: ongId,
+            }} 
+            )
+            
+            history.push('/profile');
+        } catch (error) {
+            alert('Erro ao Cadastrar Caso, Tente Novamente')
+        }
+    }
+
     return(
 
         <div className="new-incident-container">
@@ -19,10 +43,17 @@ export default function NewIncident(){
                     Voltar para Home
                 </Link>
             </section>
-            <form>
-                <input  placeholder="Titulo do Caso" />
-                <textarea type="email" placeholder="Descrição do Caso" />
-                <input  placeholder="Valor em Reais" />
+            <form onSubmit={SaveCaso}>
+                <input  placeholder="Titulo do Caso"
+                value={tittle} onChange={e=> settitle(e.target.value)}
+                />
+                <textarea type="email" placeholder="Descrição do Caso" 
+                 value={descriptions
+                } onChange={e=> setdescriptions(e.target.value)}
+                />
+                <input  placeholder="Valor em Reais"
+                value={value} onChange={e=> setvalue(e.target.value)}
+                />
                
                 <button className="button" type="submit">Cadastrar</button>
             </form>
