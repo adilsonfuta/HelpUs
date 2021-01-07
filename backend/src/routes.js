@@ -16,7 +16,8 @@ routes.post('/ongs', OngController.create);
 routes.post('/incidents',incidentControlleer.create);
 routes.get('/incidents',incidentControlleer.index);
 routes.delete('/incidents/:id',incidentControlleer.deletar);
-routes.get('/profile',profileControlleer.index); // listar caso espfco
+routes.get('/profile',profileControlleer.index); 
+// listar caso espfco
 
 // rota para fazer login
 routes.post('/sessions',sessionControlleer.create);

@@ -6,7 +6,7 @@ const routes=require('./routes');
 const app = express();
 
 // app.use(cors({
-//     origin:'http://meuapp.com'
+//     origin:'http://localhost:3000'
 // }));
 
 app.use(cors());
