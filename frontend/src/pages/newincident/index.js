@@ -7,13 +7,13 @@ import logoImg from "../../assets/logo.svg";
 import api from "../../services/API";
 
 export default function NewIncident(){
-    const [tittle, settitle] =useState('');
+    const [title, settitle] =useState('');
     const [descriptions, setdescriptions] =useState('');
     const [value, setvalue] =useState('');
     const ongId = localStorage.getItem('ongId');
     const history=useHistory();
 
-    async function SaveCaso() {
+    async function SaveCaso(e) {
         e.preventDefault();
        
         const data={title, descriptions, value, };
@@ -45,7 +45,7 @@ export default function NewIncident(){
             </section>
             <form onSubmit={SaveCaso}>
                 <input  placeholder="Titulo do Caso"
-                value={tittle} onChange={e=> settitle(e.target.value)}
+                value={title} onChange={e=> settitle(e.target.value)}
                 />
                 <textarea type="email" placeholder="Descrição do Caso" 
                  value={descriptions
