@@ -1,14 +1,23 @@
 {
   "expo": {
+<<<<<<< HEAD
     "name": "XiCola",
     "slug": "HelpUs",
+=======
+    "name": "mobile",
+    "slug": "mobile",
+>>>>>>> f1a1004ec65d75ba677b923e43b6e54dd434dfa2
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
+<<<<<<< HEAD
       "backgroundColor": "#E02041"
+=======
+      "backgroundColor": "#ffffff"
+>>>>>>> f1a1004ec65d75ba677b923e43b6e54dd434dfa2
     },
     "updates": {
       "fallbackToCacheTimeout": 0
