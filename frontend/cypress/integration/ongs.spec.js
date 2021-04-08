@@ -3,7 +3,7 @@
 
 describe('Ongs Testes', () => {
 
-    it('deve realizar cadastro', () => {
+    it.skip('deve realizar cadastro', () => {
 
         cy.visit('/register')
         cy.get('[placeholder="Nome da ONG"]').type('Leão').should('not.be.NaN')
@@ -26,14 +26,53 @@ describe('Ongs Testes', () => {
     })
 
 
-    it('Deve realizar Login', () => {
+    it.skip('Deve realizar Login', () => {
 
-        const meuid=Cypress.env('createdOng')
-        cy.log(meuid)
+        // const meuid=Cypress.env('createdOng')
+        // cy.log(meuid)
+
         cy.visit('/')
-        cy.get('input').type(meuid)
+        cy.get('input').type(Cypress.env('createdOngID'))
         cy.get('.button').click()
 
+    })
+
+
+    it.skip('devem poder fazer logout',()=>{
+      cy.Login()  
+      cy.get('.logout').click();
+
+    });
+
+
+    it.skip(' cadastrar casos Ongs', ()=>{
+       
+        cy.Login();
+        cy.get('.button').click();
+
+        cy.get('[placeholder="Titulo do Caso"]').type('animal abandonado');
+        cy.get('textarea').type('animal precisa de apoio');
+        cy.get('[placeholder="Valor em Reais"]').type('3000');
+        
+        // POST 200 /incidents
+        cy.route('POST','**/incidents').as('newIncident');
+
+        cy.get('.button').click();
+
+        cy.wait('@newIncident').then((xhr)=>{
+            expect(xhr.status).be.eq(200)
+            expect(xhr.response.body).has.property('id')
+            expect(xhr.response.body.id).is.not.null
+        })
+    })
+
+
+    it('excluir caso Ongs', ()=>{
+
+        cy.InserirCaso()
+        cy.Login()
+        
+       // cy.get('ul > :nth-child(1) > button').click
     })
 
 

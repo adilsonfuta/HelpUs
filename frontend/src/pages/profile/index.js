@@ -50,7 +50,7 @@ export default function Profile() {
                 <span> Bem Vinda, {ongName} </span>
                 <Link className="button" to="/casos/new">
                     Cadastrar Novo Caso</Link>
-                <button type="button" onClick={FazerLogout}>
+                <button type="button" onClick={FazerLogout} className="logout">
                     <FiPower size={18} color="#e02041" ></FiPower>
                 </button>
             </header>

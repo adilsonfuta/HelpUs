@@ -20,6 +20,12 @@ import './commands'
 // require('./commands')
 
 
-before(()=>{
+// before(()=>{
+   
+// })
+
+beforeEach(()=>{
+
+     cy.server()
     cy.createOng()
 })

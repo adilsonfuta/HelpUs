@@ -26,9 +26,7 @@
 
 
 Cypress.Commands.add('createOng',()=>{
-
       cy.request({
-
             method: 'POST',
             url: 'http://localhost:3333/ongs',
             body: {
@@ -41,7 +39,44 @@ Cypress.Commands.add('createOng',()=>{
         }).then(response=>{
             expect(response.body.id).is.not.null
             cy.log(response.body.id)
-            Cypress.env('createdOng',response.body.id)
+            Cypress.env('createdOngID',response.body.id)
+            Cypress.env('createdOngName',response.body.name)
+
         })
+})
+
+
+Cypress.Commands.add('Login',()=>{
+    
+    cy.visit('http://localhost:3000/profile',{
+        onBeforeLoad: (browser) => {
+            browser.localStorage.setItem('ongId',Cypress.env('createdOngID'))               
+            browser.localStorage.setItem('ongId',Cypress.env('createdOngName'))
+           // browser.localStorage.setItem('ongId','NovaDev Treinamento')           
+        }
+     });
 
 })
+
+  // 'Authorization': '228b4b19'
+Cypress.Commands.add('InserirCaso',()=>{
+    cy.request({
+          method: 'POST',
+          url: 'http://localhost:3333/incidents',
+          headers: {
+              'Accept-Language': 'pt-Br',            
+              'Authorization': `${Cypress.env('createdOngID')}`,
+         },
+          body: {
+            descriptions: "Rabbit sick e vai morrer",
+            title: "Rabbit",
+            value: "2341"
+          }
+      }).then(response=>{
+          expect(response.body.id).is.not.null
+          cy.log(response.body.id)
+          Cypress.env('createdIncidentID',response.body.id)         
+
+      })
+})
+
