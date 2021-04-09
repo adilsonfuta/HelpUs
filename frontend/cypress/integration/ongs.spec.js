@@ -3,8 +3,7 @@
 
 describe('Ongs Testes', () => {
 
-    it.skip('deve realizar cadastro', () => {
-
+it('deve realizar cadastro', () => {
         cy.visit('/register')
         cy.get('[placeholder="Nome da ONG"]').type('Leão').should('not.be.NaN')
         cy.get('[type="email"]').type('teste@mailinator.com')
